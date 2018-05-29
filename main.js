@@ -62,11 +62,13 @@ class Train {
      *              "在": {
      *                  "吗": {
      *                      "count": 1
-     *                  }
-     *              }
+     *                  },
+     *                  "count": 1
+     *              },
+     *              "count": 1
      *          }
      *      }
-     *  有效词汇 会有属性 count 标示, 此词汇出现的次数
+     *  count 标示, 此词汇出现的次数
      *  
      */
     __words_splited (word){
