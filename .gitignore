@@ -1,0 +1,4 @@
+articles/*.txt
+models/*.json
+node_modules
+
