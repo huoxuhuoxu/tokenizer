@@ -116,6 +116,16 @@ class Spider {
 
     __exit (){
         if ( !this.timer ){
+
+            if (fs.existsSync(this.urls_path)){
+                try {
+                    fs.unlinkSync(this.urls_path);
+                    console.log("删除暂停记录文件成功 ...");                
+                } catch(err){
+                    console.error("删除暂停记录文件失败, 请手动检查", err.message || err.toString());
+                }
+            }
+
             this.timer = setInterval(() => {
                 console.log("等待结束中: ", this.waited_count, running_count);
                 if (this.waited_count === running_count){
@@ -159,12 +169,15 @@ class Spider {
     // 读取: 暂停时保存的json文件
     __resume (){
 
-        const urls_path = path.resolve(__dirname, suspend_json_name);
-        if (fs.existsSync(urls_path)){
-            const suspend_urls = require(`${urls_path}`);
+        this.urls_path = path.resolve(__dirname, suspend_json_name);
+        if (fs.existsSync(this.urls_path)){
+            const suspend_urls = require(`${this.urls_path}`);
+
+            console.log("继续上一次的爬取 ...");
             return suspend_urls;
         }
 
+        console.log("新的爬取 ....");
         return { old_urls: undefined, new_urls: undefined, grabed_count: max_files };
 
     }
