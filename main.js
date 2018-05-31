@@ -148,15 +148,10 @@ class Train {
     __ignore_rare (obj, name){
         const child = name ? obj[name] : obj;
 
-        // 过滤 - 树形结构的叶 count 大小
-        if (Object.keys(child).length === 1){
-            if (child.count < word_frequency){
-                delete obj[name];
-            }
-            return ;
-        }
+        // 过滤 - 树形结构的叶
+        if (Object.keys(child).length === 1) return ;
 
-        // 过滤 - 树形结构的支 count 大小
+        // 过滤 - 树形结构的支, 比对 count 大小
         for (let s in child){
             if (s !== "count" && child[s]["count"] >= word_frequency){
                 this.__ignore_rare(child, s);

@@ -1,6 +1,6 @@
 /**
  *  @description
- *      写入文件...
+ *      articles_path: 输出文件的目录
  * 
  * 
  */
