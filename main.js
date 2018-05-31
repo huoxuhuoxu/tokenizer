@@ -5,7 +5,7 @@
  *  @class Train
  *      __words_splited: 分词
  *      __read_file: 读文件（按行读取）
- *      
+ *      __ignore_rare: 过滤训练中出现较少的词
  * 
  */
 
@@ -14,7 +14,7 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
-const { articles_path, models_path, word_length, word_ignore } = require("./config");
+const { articles_path, models_path, word_length, word_ignore, word_frequency } = require("./config");
 
 // 初始化分词对象
 const model = {};
@@ -46,7 +46,12 @@ class Train {
 
         }
 
+        say("开始过滤 - 出现频率过低的词, 减少字典树大小, 请稍等 ...");
+
+        this.__ignore_rare(model);  
         fs.writeFileSync(path.resolve(__dirname, `${models_path}/words.json`), JSON.stringify(model, null, "\t"));
+
+        say("训练完成 ...");
     }
 
     /**
@@ -140,11 +145,34 @@ class Train {
         
     }
 
+    __ignore_rare (obj, name){
+        const child = name ? obj[name] : obj;
+
+        // 过滤 - 树形结构的叶 count 大小
+        if (Object.keys(child).length === 1){
+            if (child.count < word_frequency){
+                delete obj[s];
+            }
+            return ;
+        }
+
+        // 过滤 - 树形结构的支 count 大小
+        for (let s in child){
+            if (s !== "count" && child[s]["count"] >= word_frequency){
+                this.__ignore_rare(child, s);
+                continue;
+            }
+            s !== "count" && delete child[s];
+        }
+    }
+
 }
 
 
+{
+    const train = new Train(articles_path);
+    train.run();
+}
 
-const train = new Train(articles_path);
-train.run();
 
 

@@ -10,9 +10,9 @@
 
 class UrlManage {
 
-    constructor (){
-        this.old_urls = new Set();
-        this.new_urls = new Set();
+    constructor (old_urls, new_urls){
+        this.old_urls = old_urls ? new Set(old_urls) : new Set();
+        this.new_urls = new_urls ? new Set(new_urls) : new Set();
     }
 
     // 检测还是还存在待爬取url

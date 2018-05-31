@@ -12,8 +12,8 @@ const path = require("path");
 
 class Output {
 
-    constructor (articles_path){
-        this.count = 20;
+    constructor (articles_path, index){
+        this.count = index + 20;
         this.articles_path = articles_path;
     }
 
