@@ -162,7 +162,7 @@ class Spider {
         if (fs.existsSync(urls_path)){
             const suspend_urls = require(`${urls_path}`);
             return suspend_urls;
-        };
+        }
 
         return { old_urls: undefined, new_urls: undefined, grabed_count: max_files };
 

@@ -151,7 +151,7 @@ class Train {
         // 过滤 - 树形结构的叶 count 大小
         if (Object.keys(child).length === 1){
             if (child.count < word_frequency){
-                delete obj[s];
+                delete obj[name];
             }
             return ;
         }
