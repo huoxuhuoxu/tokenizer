@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/huoxuhuoxu/tokenizer#readme",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "dotenv": "^5.0.1"
+    "cheerio": "^1.0.0-rc.2"
   }
 }

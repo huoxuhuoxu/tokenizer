@@ -7,8 +7,7 @@
 
 const model = require("../models/words.json");
 
-const word_length = 4;
-const word_ignore = ["你", "我", "在", "和", "了", "把", "和", "与", "为", "的", "一", "是", "这", "就"];
+const { word_length, word_ignore } = require("../config");
 
 const splited_words = (str) => {
 

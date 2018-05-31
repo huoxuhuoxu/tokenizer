@@ -11,10 +11,9 @@
  * 
  */
 
-require("dotenv").config();
-
 const events = require("events");
 
+const { articles_path } = require("../config");
 const UrlManage = require("./urls_manage");
 const DownloadHTML = require("./download_html");
 const ParserHTML = require("./parser_html");
@@ -32,7 +31,7 @@ class Spider {
         this.url_manage = new UrlManage();
         this.download_html = new DownloadHTML();
         this.parser_html = new ParserHTML();
-        this.output = new Output(process.env.articles_path);
+        this.output = new Output(articles_path);
 
         this.waited_count = max_waited_count;
         this.b_running = true;

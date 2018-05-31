@@ -14,12 +14,12 @@ const fs = require("fs");
 const path = require("path");
 const readline = require("readline");
 
-const say = (...args) => { console.log(...args); };
+const { articles_path, models_path, word_length, word_ignore } = require("./config");
 
 // 初始化分词对象
 const model = {};
-const word_length = 4;
-const word_ignore = ["你", "我", "在", "和", "了", "把", "和", "与", "为", "的", "一", "是", "这", "就"];
+
+const say = (...args) => { console.log(...args); };
 
 class Train {
 
@@ -46,7 +46,7 @@ class Train {
 
         }
 
-        fs.writeFileSync(path.resolve(__dirname, "./models/words.json"), JSON.stringify(model, null, "\t"));
+        fs.writeFileSync(path.resolve(__dirname, `${models_path}/words.json`), JSON.stringify(model, null, "\t"));
     }
 
     /**
@@ -89,7 +89,6 @@ class Train {
                 current_model.count++;
             }
 
-            // current_model.count ? current_model.count++ : current_model.count = 1;
         }
 
     }
@@ -145,7 +144,7 @@ class Train {
 
 
 
-const train = new Train("./articles");
+const train = new Train(articles_path);
 train.run();
 
 
