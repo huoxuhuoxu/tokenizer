@@ -17,7 +17,7 @@ const readline = require("readline");
 const { articles_path, models_path, word_length, word_ignore, word_frequency } = require("./config");
 
 // 初始化分词对象
-const model = {};
+const model = Object.create(null);
 
 const say = (...args) => { console.log(...args); };
 
